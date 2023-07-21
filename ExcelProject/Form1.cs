@@ -60,8 +60,13 @@ namespace ExcelProject
                 }
                 else
                 {
-                    MessageBox.Show("Excel dosyasını seçmediniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    if(listBox1.Items.Count == 0)
+                    {
+                        MessageBox.Show("Excel dosyasını seçmediniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.button1_Click(sender, e);
+                        break;
+                    }
+                    
                 }
             }
             while (stop == false);

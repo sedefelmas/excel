@@ -24,14 +24,16 @@ namespace ExcelProject
         {
             do
             {
+                string filePath = string.Empty;
+                openFileDialog1.InitialDirectory = Application.StartupPath;
+                openFileDialog1.FileName = "*.xlsx";
+                openFileDialog1.Filter = "xlsx files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    string strFilePath = string.Empty;
-                    openFileDialog1.InitialDirectory = Application.StartupPath;
-                    openFileDialog1.FileName = "*.xlsx";
-                    openFileDialog1.Filter = "xlsx files (*.xlsx)|*.xlsx|All files (*.*)|*.*"; 
+                    filePath = openFileDialog1.FileName;
                     Excel.Application xlApp = new Excel.Application();
-                    Excel.Workbook xlWorkbook = xlApp.Workbooks.Add();
+                    //Excel.Workbook xlWorkbook = xlApp.Workbooks.Add();
+                    Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(filePath);
                     Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                     Excel.Range xlRange = xlWorksheet.UsedRange;
                     int rowCount = xlRange.Rows.Count;
@@ -58,7 +60,7 @@ namespace ExcelProject
                 }
                 else
                 {
-                    MessageBox.Show("Excel dosyasını seçmediniz", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Excel dosyasını seçmediniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 }
             }
